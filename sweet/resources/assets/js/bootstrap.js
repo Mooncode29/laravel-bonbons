@@ -17,7 +17,7 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -45,10 +45,32 @@ window.axios.defaults.headers.common = {
 //     key: 'your-pusher-key'
 // });
 console.log('hello world!');
+
 axios.get('/api/bonbons')
   .then(function (response) {
-    console.log(response);
+  	let len = response.data.length;
+	for (let i=0; i<len; i++){
+		let bonbon = response.data[i];
+		$('#app').append(
+			'<tr>'+
+			'<td>'+ bonbon.id + '</td>'+
+			'<td>' + bonbon.name + '</td>'+
+			'<td>' + bonbon.quantity + '</td>' +
+			'</tr>');
+	}
   })
   .catch(function (error) {
     console.log(error);
   });
+
+// function displayData(response){
+// 	let len = response.data.length;
+// 	for (let i=0; i<len; i++){
+// 		$('#app').append(
+// 			'<tr>'+
+// 			'<td>'+ response.data[i].id + '</td>');
+
+// 	}
+// };
+
+// axios.post('/api/bonbons/create')
